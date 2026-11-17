@@ -1,0 +1,48 @@
+erDiagram
+    USERS ||--o{ LIBRARIES : owns
+    USERS ||--o{ LIBRARY_SELECTIONS : makes
+    LIBRARIES ||--o{ LIBRARY_SELECTIONS : receives
+    LIBRARIES ||--o{ LIBRARY_FACILITIES : has
+    FACILITIES ||--o{ LIBRARY_FACILITIES : included_in
+
+    USERS {
+        bigint user_id PK
+        varchar full_name
+        varchar email UK
+        text password_hash
+        varchar role
+        timestamptz created_at
+    }
+
+    LIBRARIES {
+        bigint library_id PK
+        bigint owner_id FK
+        varchar library_name
+        varchar area
+        varchar city
+        numeric monthly_price
+        int seat_capacity
+        numeric rating
+        varchar opening_hours
+        text image_path
+        timestamptz created_at
+    }
+
+    FACILITIES {
+        bigint facility_id PK
+        varchar facility_name UK
+    }
+
+    LIBRARY_FACILITIES {
+        bigint library_id PK, FK
+        bigint facility_id PK, FK
+    }
+
+    LIBRARY_SELECTIONS {
+        bigint selection_id PK
+        bigint user_id FK
+        bigint library_id FK
+        varchar status
+        timestamptz selected_at
+        timestamptz updated_at
+    }
