@@ -1,0 +1,51 @@
+=== Run 1 ===
+BEGIN
+                                             QUERY PLAN                                             
+----------------------------------------------------------------------------------------------------
+ Insert on libraries  (cost=0.00..0.01 rows=1 width=1100) (actual time=0.496..0.497 rows=1 loops=1)
+   Buffers: shared hit=77
+   ->  Result  (cost=0.00..0.01 rows=1 width=1100) (actual time=0.062..0.062 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=3
+ Planning Time: 0.154 ms
+ Trigger for constraint libraries_owner_id_fkey: time=0.986 calls=1
+ Execution Time: 1.519 ms
+(9 rows)
+
+ROLLBACK
+
+=== Run 2 ===
+BEGIN
+                                             QUERY PLAN                                             
+----------------------------------------------------------------------------------------------------
+ Insert on libraries  (cost=0.00..0.01 rows=1 width=1100) (actual time=0.585..0.586 rows=1 loops=1)
+   Buffers: shared hit=77
+   ->  Result  (cost=0.00..0.01 rows=1 width=1100) (actual time=0.066..0.067 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=3
+ Planning Time: 0.173 ms
+ Trigger for constraint libraries_owner_id_fkey: time=0.945 calls=1
+ Execution Time: 1.574 ms
+(9 rows)
+
+ROLLBACK
+
+=== Run 3 ===
+BEGIN
+                                             QUERY PLAN                                             
+----------------------------------------------------------------------------------------------------
+ Insert on libraries  (cost=0.00..0.01 rows=1 width=1100) (actual time=0.213..0.214 rows=1 loops=1)
+   Buffers: shared hit=77
+   ->  Result  (cost=0.00..0.01 rows=1 width=1100) (actual time=0.026..0.027 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=3
+ Planning Time: 0.069 ms
+ Trigger for constraint libraries_owner_id_fkey: time=0.513 calls=1
+ Execution Time: 0.743 ms
+(9 rows)
+
+ROLLBACK
+

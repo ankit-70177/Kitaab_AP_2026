@@ -1,0 +1,90 @@
+=== Run 1 ===
+                                                                         QUERY PLAN                                                                          
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=42.02..42.04 rows=6 width=818) (actual time=0.119..0.121 rows=3 loops=1)
+   Sort Key: l.monthly_price, l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=16
+   ->  Nested Loop  (cost=22.32..41.94 rows=6 width=818) (actual time=0.064..0.072 rows=3 loops=1)
+         Buffers: shared hit=10
+         ->  Nested Loop  (cost=22.18..40.83 rows=6 width=8) (actual time=0.048..0.050 rows=3 loops=1)
+               Buffers: shared hit=4
+               ->  Index Scan using facilities_facility_name_key on facilities f  (cost=0.15..8.17 rows=1 width=8) (actual time=0.026..0.026 rows=1 loops=1)
+                     Index Cond: ((facility_name)::text = 'High-speed Wi-Fi'::text)
+                     Buffers: shared hit=2
+               ->  Bitmap Heap Scan on library_facilities lf  (cost=22.03..32.57 rows=9 width=16) (actual time=0.017..0.018 rows=3 loops=1)
+                     Recheck Cond: (facility_id = f.facility_id)
+                     Heap Blocks: exact=1
+                     Buffers: shared hit=2
+                     ->  Bitmap Index Scan on library_facilities_pkey  (cost=0.00..22.03 rows=9 width=0) (actual time=0.003..0.004 rows=3 loops=1)
+                           Index Cond: (facility_id = f.facility_id)
+                           Buffers: shared hit=1
+         ->  Index Scan using libraries_pkey on libraries l  (cost=0.14..0.19 rows=1 width=818) (actual time=0.005..0.005 rows=1 loops=3)
+               Index Cond: (library_id = lf.library_id)
+               Buffers: shared hit=6
+ Planning:
+   Buffers: shared hit=257
+ Planning Time: 1.632 ms
+ Execution Time: 0.208 ms
+(25 rows)
+
+=== Run 2 ===
+                                                                         QUERY PLAN                                                                          
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=42.02..42.04 rows=6 width=818) (actual time=0.121..0.123 rows=3 loops=1)
+   Sort Key: l.monthly_price, l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=16
+   ->  Nested Loop  (cost=22.32..41.94 rows=6 width=818) (actual time=0.060..0.068 rows=3 loops=1)
+         Buffers: shared hit=10
+         ->  Nested Loop  (cost=22.18..40.83 rows=6 width=8) (actual time=0.042..0.045 rows=3 loops=1)
+               Buffers: shared hit=4
+               ->  Index Scan using facilities_facility_name_key on facilities f  (cost=0.15..8.17 rows=1 width=8) (actual time=0.028..0.028 rows=1 loops=1)
+                     Index Cond: ((facility_name)::text = 'High-speed Wi-Fi'::text)
+                     Buffers: shared hit=2
+               ->  Bitmap Heap Scan on library_facilities lf  (cost=22.03..32.57 rows=9 width=16) (actual time=0.010..0.011 rows=3 loops=1)
+                     Recheck Cond: (facility_id = f.facility_id)
+                     Heap Blocks: exact=1
+                     Buffers: shared hit=2
+                     ->  Bitmap Index Scan on library_facilities_pkey  (cost=0.00..22.03 rows=9 width=0) (actual time=0.004..0.004 rows=3 loops=1)
+                           Index Cond: (facility_id = f.facility_id)
+                           Buffers: shared hit=1
+         ->  Index Scan using libraries_pkey on libraries l  (cost=0.14..0.19 rows=1 width=818) (actual time=0.006..0.006 rows=1 loops=3)
+               Index Cond: (library_id = lf.library_id)
+               Buffers: shared hit=6
+ Planning:
+   Buffers: shared hit=257
+ Planning Time: 1.689 ms
+ Execution Time: 0.225 ms
+(25 rows)
+
+=== Run 3 ===
+                                                                         QUERY PLAN                                                                          
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=42.02..42.04 rows=6 width=818) (actual time=0.060..0.061 rows=3 loops=1)
+   Sort Key: l.monthly_price, l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=16
+   ->  Nested Loop  (cost=22.32..41.94 rows=6 width=818) (actual time=0.030..0.034 rows=3 loops=1)
+         Buffers: shared hit=10
+         ->  Nested Loop  (cost=22.18..40.83 rows=6 width=8) (actual time=0.021..0.022 rows=3 loops=1)
+               Buffers: shared hit=4
+               ->  Index Scan using facilities_facility_name_key on facilities f  (cost=0.15..8.17 rows=1 width=8) (actual time=0.014..0.014 rows=1 loops=1)
+                     Index Cond: ((facility_name)::text = 'High-speed Wi-Fi'::text)
+                     Buffers: shared hit=2
+               ->  Bitmap Heap Scan on library_facilities lf  (cost=22.03..32.57 rows=9 width=16) (actual time=0.005..0.005 rows=3 loops=1)
+                     Recheck Cond: (facility_id = f.facility_id)
+                     Heap Blocks: exact=1
+                     Buffers: shared hit=2
+                     ->  Bitmap Index Scan on library_facilities_pkey  (cost=0.00..22.03 rows=9 width=0) (actual time=0.002..0.002 rows=3 loops=1)
+                           Index Cond: (facility_id = f.facility_id)
+                           Buffers: shared hit=1
+         ->  Index Scan using libraries_pkey on libraries l  (cost=0.14..0.19 rows=1 width=818) (actual time=0.003..0.003 rows=1 loops=3)
+               Index Cond: (library_id = lf.library_id)
+               Buffers: shared hit=6
+ Planning:
+   Buffers: shared hit=257
+ Planning Time: 1.984 ms
+ Execution Time: 0.175 ms
+(25 rows)
+

@@ -1,0 +1,48 @@
+=== Run 1 ===
+BEGIN
+                                          QUERY PLAN                                           
+-----------------------------------------------------------------------------------------------
+ Insert on users  (cost=0.00..0.01 rows=1 width=840) (actual time=0.274..0.275 rows=1 loops=1)
+   Buffers: shared hit=68
+   ->  Result  (cost=0.00..0.01 rows=1 width=840) (actual time=0.054..0.054 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=6
+ Planning Time: 0.135 ms
+ Execution Time: 0.304 ms
+(8 rows)
+
+ROLLBACK
+
+=== Run 2 ===
+BEGIN
+                                          QUERY PLAN                                           
+-----------------------------------------------------------------------------------------------
+ Insert on users  (cost=0.00..0.01 rows=1 width=840) (actual time=0.209..0.210 rows=1 loops=1)
+   Buffers: shared hit=69
+   ->  Result  (cost=0.00..0.01 rows=1 width=840) (actual time=0.032..0.032 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=6
+ Planning Time: 0.069 ms
+ Execution Time: 0.234 ms
+(8 rows)
+
+ROLLBACK
+
+=== Run 3 ===
+BEGIN
+                                          QUERY PLAN                                           
+-----------------------------------------------------------------------------------------------
+ Insert on users  (cost=0.00..0.01 rows=1 width=840) (actual time=0.212..0.212 rows=1 loops=1)
+   Buffers: shared hit=69
+   ->  Result  (cost=0.00..0.01 rows=1 width=840) (actual time=0.032..0.032 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=6
+ Planning Time: 0.071 ms
+ Execution Time: 0.227 ms
+(8 rows)
+
+ROLLBACK
+

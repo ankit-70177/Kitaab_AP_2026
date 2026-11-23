@@ -1,0 +1,75 @@
+=== Run 1 ===
+                                                        QUERY PLAN                                                         
+---------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=31.69..31.86 rows=69 width=326) (actual time=0.138..0.140 rows=2 loops=1)
+   Sort Key: l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=5
+   ->  Hash Right Anti Join  (cost=11.57..29.58 rows=69 width=326) (actual time=0.064..0.069 rows=2 loops=1)
+         Hash Cond: (s.library_id = l.library_id)
+         Buffers: shared hit=2
+         ->  Seq Scan on library_selections s  (cost=0.00..18.00 rows=3 width=8) (actual time=0.006..0.008 rows=5 loops=1)
+               Filter: ((status)::text = 'active'::text)
+               Rows Removed by Filter: 1
+               Buffers: shared hit=1
+         ->  Hash  (cost=10.70..10.70 rows=70 width=326) (actual time=0.032..0.032 rows=6 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=326) (actual time=0.017..0.019 rows=6 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=242
+ Planning Time: 1.192 ms
+ Execution Time: 0.222 ms
+(20 rows)
+
+=== Run 2 ===
+                                                        QUERY PLAN                                                         
+---------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=31.69..31.86 rows=69 width=326) (actual time=0.044..0.045 rows=2 loops=1)
+   Sort Key: l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=5
+   ->  Hash Right Anti Join  (cost=11.57..29.58 rows=69 width=326) (actual time=0.022..0.024 rows=2 loops=1)
+         Hash Cond: (s.library_id = l.library_id)
+         Buffers: shared hit=2
+         ->  Seq Scan on library_selections s  (cost=0.00..18.00 rows=3 width=8) (actual time=0.003..0.004 rows=5 loops=1)
+               Filter: ((status)::text = 'active'::text)
+               Rows Removed by Filter: 1
+               Buffers: shared hit=1
+         ->  Hash  (cost=10.70..10.70 rows=70 width=326) (actual time=0.011..0.011 rows=6 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=326) (actual time=0.005..0.006 rows=6 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=242
+ Planning Time: 0.601 ms
+ Execution Time: 0.093 ms
+(20 rows)
+
+=== Run 3 ===
+                                                        QUERY PLAN                                                         
+---------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=31.69..31.86 rows=69 width=326) (actual time=0.066..0.066 rows=2 loops=1)
+   Sort Key: l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=5
+   ->  Hash Right Anti Join  (cost=11.57..29.58 rows=69 width=326) (actual time=0.038..0.040 rows=2 loops=1)
+         Hash Cond: (s.library_id = l.library_id)
+         Buffers: shared hit=2
+         ->  Seq Scan on library_selections s  (cost=0.00..18.00 rows=3 width=8) (actual time=0.003..0.004 rows=5 loops=1)
+               Filter: ((status)::text = 'active'::text)
+               Rows Removed by Filter: 1
+               Buffers: shared hit=1
+         ->  Hash  (cost=10.70..10.70 rows=70 width=326) (actual time=0.024..0.024 rows=6 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=326) (actual time=0.008..0.009 rows=6 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=242
+ Planning Time: 1.242 ms
+ Execution Time: 0.125 ms
+(20 rows)
+

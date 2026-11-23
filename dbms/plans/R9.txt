@@ -1,0 +1,81 @@
+=== Run 1 ===
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=37.33..37.51 rows=70 width=334) (actual time=0.131..0.133 rows=6 loops=1)
+   Sort Key: (count(s.selection_id) FILTER (WHERE ((s.status)::text = 'active'::text))) DESC, l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=8
+   ->  HashAggregate  (cost=34.49..35.19 rows=70 width=334) (actual time=0.077..0.082 rows=6 loops=1)
+         Group Key: l.library_id
+         Batches: 1  Memory Usage: 24kB
+         Buffers: shared hit=2
+         ->  Hash Right Join  (cost=11.57..29.69 rows=640 width=392) (actual time=0.051..0.063 rows=8 loops=1)
+               Hash Cond: (s.library_id = l.library_id)
+               Buffers: shared hit=2
+               ->  Seq Scan on library_selections s  (cost=0.00..16.40 rows=640 width=74) (actual time=0.013..0.014 rows=6 loops=1)
+                     Buffers: shared hit=1
+               ->  Hash  (cost=10.70..10.70 rows=70 width=326) (actual time=0.021..0.022 rows=6 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                     Buffers: shared hit=1
+                     ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=326) (actual time=0.011..0.013 rows=6 loops=1)
+                           Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=184
+ Planning Time: 1.599 ms
+ Execution Time: 0.249 ms
+(22 rows)
+
+=== Run 2 ===
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=37.33..37.51 rows=70 width=334) (actual time=0.123..0.125 rows=6 loops=1)
+   Sort Key: (count(s.selection_id) FILTER (WHERE ((s.status)::text = 'active'::text))) DESC, l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=8
+   ->  HashAggregate  (cost=34.49..35.19 rows=70 width=334) (actual time=0.069..0.073 rows=6 loops=1)
+         Group Key: l.library_id
+         Batches: 1  Memory Usage: 24kB
+         Buffers: shared hit=2
+         ->  Hash Right Join  (cost=11.57..29.69 rows=640 width=392) (actual time=0.041..0.053 rows=8 loops=1)
+               Hash Cond: (s.library_id = l.library_id)
+               Buffers: shared hit=2
+               ->  Seq Scan on library_selections s  (cost=0.00..16.40 rows=640 width=74) (actual time=0.004..0.005 rows=6 loops=1)
+                     Buffers: shared hit=1
+               ->  Hash  (cost=10.70..10.70 rows=70 width=326) (actual time=0.020..0.021 rows=6 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                     Buffers: shared hit=1
+                     ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=326) (actual time=0.011..0.013 rows=6 loops=1)
+                           Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=184
+ Planning Time: 1.103 ms
+ Execution Time: 0.253 ms
+(22 rows)
+
+=== Run 3 ===
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=37.33..37.51 rows=70 width=334) (actual time=0.133..0.136 rows=6 loops=1)
+   Sort Key: (count(s.selection_id) FILTER (WHERE ((s.status)::text = 'active'::text))) DESC, l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=8
+   ->  HashAggregate  (cost=34.49..35.19 rows=70 width=334) (actual time=0.072..0.076 rows=6 loops=1)
+         Group Key: l.library_id
+         Batches: 1  Memory Usage: 24kB
+         Buffers: shared hit=2
+         ->  Hash Right Join  (cost=11.57..29.69 rows=640 width=392) (actual time=0.044..0.056 rows=8 loops=1)
+               Hash Cond: (s.library_id = l.library_id)
+               Buffers: shared hit=2
+               ->  Seq Scan on library_selections s  (cost=0.00..16.40 rows=640 width=74) (actual time=0.005..0.006 rows=6 loops=1)
+                     Buffers: shared hit=1
+               ->  Hash  (cost=10.70..10.70 rows=70 width=326) (actual time=0.023..0.023 rows=6 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                     Buffers: shared hit=1
+                     ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=326) (actual time=0.013..0.015 rows=6 loops=1)
+                           Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=184
+ Planning Time: 1.366 ms
+ Execution Time: 0.276 ms
+(22 rows)
+

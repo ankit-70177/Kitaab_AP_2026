@@ -1,0 +1,54 @@
+=== Run 1 ===
+BEGIN
+                                                QUERY PLAN                                                 
+-----------------------------------------------------------------------------------------------------------
+ Insert on library_selections  (cost=0.00..0.02 rows=1 width=98) (actual time=0.456..0.457 rows=1 loops=1)
+   Buffers: shared hit=75
+   ->  Result  (cost=0.00..0.02 rows=1 width=98) (actual time=0.061..0.062 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=3
+ Planning Time: 0.153 ms
+ Trigger for constraint library_selections_user_id_fkey: time=0.994 calls=1
+ Trigger for constraint library_selections_library_id_fkey: time=0.566 calls=1
+ Execution Time: 2.054 ms
+(10 rows)
+
+ROLLBACK
+
+=== Run 2 ===
+BEGIN
+                                                QUERY PLAN                                                 
+-----------------------------------------------------------------------------------------------------------
+ Insert on library_selections  (cost=0.00..0.02 rows=1 width=98) (actual time=0.456..0.457 rows=1 loops=1)
+   Buffers: shared hit=75
+   ->  Result  (cost=0.00..0.02 rows=1 width=98) (actual time=0.063..0.063 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=3
+ Planning Time: 0.137 ms
+ Trigger for constraint library_selections_user_id_fkey: time=0.972 calls=1
+ Trigger for constraint library_selections_library_id_fkey: time=0.588 calls=1
+ Execution Time: 2.053 ms
+(10 rows)
+
+ROLLBACK
+
+=== Run 3 ===
+BEGIN
+                                                QUERY PLAN                                                 
+-----------------------------------------------------------------------------------------------------------
+ Insert on library_selections  (cost=0.00..0.02 rows=1 width=98) (actual time=0.508..0.510 rows=1 loops=1)
+   Buffers: shared hit=75
+   ->  Result  (cost=0.00..0.02 rows=1 width=98) (actual time=0.061..0.062 rows=1 loops=1)
+         Buffers: shared hit=10
+ Planning:
+   Buffers: shared hit=3
+ Planning Time: 0.146 ms
+ Trigger for constraint library_selections_user_id_fkey: time=0.933 calls=1
+ Trigger for constraint library_selections_library_id_fkey: time=0.399 calls=1
+ Execution Time: 1.875 ms
+(10 rows)
+
+ROLLBACK
+

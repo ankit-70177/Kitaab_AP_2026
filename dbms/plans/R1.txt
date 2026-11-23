@@ -1,0 +1,39 @@
+=== Run 1 ===
+                                            QUERY PLAN                                            
+--------------------------------------------------------------------------------------------------
+ Seq Scan on users  (cost=0.00..11.35 rows=1 width=832) (actual time=0.015..0.019 rows=1 loops=1)
+   Filter: (lower((email)::text) = 'owner@example.com'::text)
+   Rows Removed by Filter: 4
+   Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=93
+ Planning Time: 0.893 ms
+ Execution Time: 0.040 ms
+(8 rows)
+
+=== Run 2 ===
+                                            QUERY PLAN                                            
+--------------------------------------------------------------------------------------------------
+ Seq Scan on users  (cost=0.00..11.35 rows=1 width=832) (actual time=0.014..0.019 rows=1 loops=1)
+   Filter: (lower((email)::text) = 'owner@example.com'::text)
+   Rows Removed by Filter: 4
+   Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=93
+ Planning Time: 0.792 ms
+ Execution Time: 0.042 ms
+(8 rows)
+
+=== Run 3 ===
+                                            QUERY PLAN                                            
+--------------------------------------------------------------------------------------------------
+ Seq Scan on users  (cost=0.00..11.35 rows=1 width=832) (actual time=0.018..0.022 rows=1 loops=1)
+   Filter: (lower((email)::text) = 'owner@example.com'::text)
+   Rows Removed by Filter: 4
+   Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=93
+ Planning Time: 0.733 ms
+ Execution Time: 0.043 ms
+(8 rows)
+

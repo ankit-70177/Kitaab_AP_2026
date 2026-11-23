@@ -1,0 +1,63 @@
+=== Run 1 ===
+                                                                           QUERY PLAN                                                                           
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=28.90..28.99 rows=35 width=544) (actual time=0.116..0.117 rows=6 loops=1)
+   Sort Key: l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=16
+   ->  Nested Loop Semi Join  (cost=0.15..28.00 rows=35 width=544) (actual time=0.080..0.091 rows=6 loops=1)
+         Buffers: shared hit=13
+         ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=544) (actual time=0.005..0.005 rows=6 loops=1)
+               Buffers: shared hit=1
+         ->  Index Only Scan using library_facilities_pkey on library_facilities lf  (cost=0.15..1.00 rows=9 width=8) (actual time=0.014..0.014 rows=1 loops=6)
+               Index Cond: (library_id = l.library_id)
+               Heap Fetches: 6
+               Buffers: shared hit=12
+ Planning:
+   Buffers: shared hit=225
+ Planning Time: 1.228 ms
+ Execution Time: 0.144 ms
+(16 rows)
+
+=== Run 2 ===
+                                                                           QUERY PLAN                                                                           
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=28.90..28.99 rows=35 width=544) (actual time=0.116..0.118 rows=6 loops=1)
+   Sort Key: l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=16
+   ->  Nested Loop Semi Join  (cost=0.15..28.00 rows=35 width=544) (actual time=0.047..0.061 rows=6 loops=1)
+         Buffers: shared hit=13
+         ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=544) (actual time=0.009..0.010 rows=6 loops=1)
+               Buffers: shared hit=1
+         ->  Index Only Scan using library_facilities_pkey on library_facilities lf  (cost=0.15..1.00 rows=9 width=8) (actual time=0.006..0.006 rows=1 loops=6)
+               Index Cond: (library_id = l.library_id)
+               Heap Fetches: 6
+               Buffers: shared hit=12
+ Planning:
+   Buffers: shared hit=225
+ Planning Time: 0.642 ms
+ Execution Time: 0.179 ms
+(16 rows)
+
+=== Run 3 ===
+                                                                           QUERY PLAN                                                                           
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=28.90..28.99 rows=35 width=544) (actual time=0.065..0.066 rows=6 loops=1)
+   Sort Key: l.library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=16
+   ->  Nested Loop Semi Join  (cost=0.15..28.00 rows=35 width=544) (actual time=0.025..0.031 rows=6 loops=1)
+         Buffers: shared hit=13
+         ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=544) (actual time=0.005..0.006 rows=6 loops=1)
+               Buffers: shared hit=1
+         ->  Index Only Scan using library_facilities_pkey on library_facilities lf  (cost=0.15..1.00 rows=9 width=8) (actual time=0.003..0.003 rows=1 loops=6)
+               Index Cond: (library_id = l.library_id)
+               Heap Fetches: 6
+               Buffers: shared hit=12
+ Planning:
+   Buffers: shared hit=225
+ Planning Time: 0.673 ms
+ Execution Time: 0.099 ms
+(16 rows)
+

@@ -1,0 +1,54 @@
+=== Run 1 ===
+BEGIN
+                                                                    QUERY PLAN                                                                     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ Update on library_selections  (cost=0.15..8.17 rows=1 width=72) (actual time=0.216..0.218 rows=1 loops=1)
+   Buffers: shared hit=22
+   ->  Index Scan using library_selections_pkey on library_selections  (cost=0.15..8.17 rows=1 width=72) (actual time=0.034..0.035 rows=1 loops=1)
+         Index Cond: (selection_id = 1)
+         Filter: (user_id = 2)
+         Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=96
+ Planning Time: 0.868 ms
+ Execution Time: 0.421 ms
+(10 rows)
+
+ROLLBACK
+
+=== Run 2 ===
+BEGIN
+                                                                    QUERY PLAN                                                                     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ Update on library_selections  (cost=0.15..8.17 rows=1 width=72) (actual time=0.306..0.308 rows=1 loops=1)
+   Buffers: shared hit=22
+   ->  Index Scan using library_selections_pkey on library_selections  (cost=0.15..8.17 rows=1 width=72) (actual time=0.052..0.054 rows=1 loops=1)
+         Index Cond: (selection_id = 1)
+         Filter: (user_id = 2)
+         Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=96
+ Planning Time: 0.921 ms
+ Execution Time: 0.487 ms
+(10 rows)
+
+ROLLBACK
+
+=== Run 3 ===
+BEGIN
+                                                                    QUERY PLAN                                                                     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ Update on library_selections  (cost=0.15..8.17 rows=1 width=72) (actual time=0.171..0.172 rows=1 loops=1)
+   Buffers: shared hit=22
+   ->  Index Scan using library_selections_pkey on library_selections  (cost=0.15..8.17 rows=1 width=72) (actual time=0.032..0.033 rows=1 loops=1)
+         Index Cond: (selection_id = 1)
+         Filter: (user_id = 2)
+         Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=96
+ Planning Time: 0.779 ms
+ Execution Time: 0.288 ms
+(10 rows)
+
+ROLLBACK
+

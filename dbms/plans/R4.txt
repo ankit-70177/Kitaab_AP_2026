@@ -1,0 +1,51 @@
+=== Run 1 ===
+                                                             QUERY PLAN                                                              
+-------------------------------------------------------------------------------------------------------------------------------------
+ Nested Loop Left Join  (cost=0.29..16.50 rows=1 width=1310) (actual time=0.016..0.017 rows=1 loops=1)
+   Buffers: shared hit=7
+   ->  Index Scan using libraries_pkey on libraries l  (cost=0.14..8.16 rows=1 width=1092) (actual time=0.011..0.011 rows=1 loops=1)
+         Index Cond: (library_id = 1)
+         Buffers: shared hit=5
+   ->  Index Scan using users_pkey on users u  (cost=0.14..8.16 rows=1 width=226) (actual time=0.003..0.003 rows=1 loops=1)
+         Index Cond: (user_id = l.owner_id)
+         Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=252
+ Planning Time: 0.758 ms
+ Execution Time: 0.046 ms
+(12 rows)
+
+=== Run 2 ===
+                                                             QUERY PLAN                                                              
+-------------------------------------------------------------------------------------------------------------------------------------
+ Nested Loop Left Join  (cost=0.29..16.50 rows=1 width=1310) (actual time=0.042..0.043 rows=1 loops=1)
+   Buffers: shared hit=7
+   ->  Index Scan using libraries_pkey on libraries l  (cost=0.14..8.16 rows=1 width=1092) (actual time=0.027..0.028 rows=1 loops=1)
+         Index Cond: (library_id = 1)
+         Buffers: shared hit=5
+   ->  Index Scan using users_pkey on users u  (cost=0.14..8.16 rows=1 width=226) (actual time=0.009..0.009 rows=1 loops=1)
+         Index Cond: (user_id = l.owner_id)
+         Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=252
+ Planning Time: 0.961 ms
+ Execution Time: 0.152 ms
+(12 rows)
+
+=== Run 3 ===
+                                                             QUERY PLAN                                                              
+-------------------------------------------------------------------------------------------------------------------------------------
+ Nested Loop Left Join  (cost=0.29..16.50 rows=1 width=1310) (actual time=0.038..0.040 rows=1 loops=1)
+   Buffers: shared hit=7
+   ->  Index Scan using libraries_pkey on libraries l  (cost=0.14..8.16 rows=1 width=1092) (actual time=0.023..0.024 rows=1 loops=1)
+         Index Cond: (library_id = 1)
+         Buffers: shared hit=5
+   ->  Index Scan using users_pkey on users u  (cost=0.14..8.16 rows=1 width=226) (actual time=0.008..0.008 rows=1 loops=1)
+         Index Cond: (user_id = l.owner_id)
+         Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=252
+ Planning Time: 1.229 ms
+ Execution Time: 0.096 ms
+(12 rows)
+

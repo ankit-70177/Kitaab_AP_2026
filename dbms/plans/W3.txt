@@ -1,0 +1,57 @@
+=== Run 1 ===
+BEGIN
+                                                QUERY PLAN                                                 
+-----------------------------------------------------------------------------------------------------------
+ Insert on library_facilities  (cost=0.00..0.01 rows=1 width=16) (actual time=0.134..0.135 rows=0 loops=1)
+   Conflict Resolution: NOTHING
+   Conflict Arbiter Indexes: library_facilities_pkey
+   Tuples Inserted: 0
+   Conflicting Tuples: 1
+   Buffers: shared hit=11
+   ->  Result  (cost=0.00..0.01 rows=1 width=16) (actual time=0.001..0.001 rows=1 loops=1)
+ Planning:
+   Buffers: shared hit=33
+ Planning Time: 0.216 ms
+ Execution Time: 0.168 ms
+(11 rows)
+
+ROLLBACK
+
+=== Run 2 ===
+BEGIN
+                                                QUERY PLAN                                                 
+-----------------------------------------------------------------------------------------------------------
+ Insert on library_facilities  (cost=0.00..0.01 rows=1 width=16) (actual time=0.126..0.127 rows=0 loops=1)
+   Conflict Resolution: NOTHING
+   Conflict Arbiter Indexes: library_facilities_pkey
+   Tuples Inserted: 0
+   Conflicting Tuples: 1
+   Buffers: shared hit=11
+   ->  Result  (cost=0.00..0.01 rows=1 width=16) (actual time=0.001..0.002 rows=1 loops=1)
+ Planning:
+   Buffers: shared hit=33
+ Planning Time: 0.235 ms
+ Execution Time: 0.161 ms
+(11 rows)
+
+ROLLBACK
+
+=== Run 3 ===
+BEGIN
+                                                QUERY PLAN                                                 
+-----------------------------------------------------------------------------------------------------------
+ Insert on library_facilities  (cost=0.00..0.01 rows=1 width=16) (actual time=0.099..0.100 rows=0 loops=1)
+   Conflict Resolution: NOTHING
+   Conflict Arbiter Indexes: library_facilities_pkey
+   Tuples Inserted: 0
+   Conflicting Tuples: 1
+   Buffers: shared hit=11
+   ->  Result  (cost=0.00..0.01 rows=1 width=16) (actual time=0.001..0.002 rows=1 loops=1)
+ Planning:
+   Buffers: shared hit=33
+ Planning Time: 0.224 ms
+ Execution Time: 0.136 ms
+(11 rows)
+
+ROLLBACK
+

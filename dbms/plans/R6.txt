@@ -1,0 +1,117 @@
+=== Run 1 ===
+                                                                             QUERY PLAN                                                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=25.56..25.57 rows=1 width=866) (actual time=0.108..0.109 rows=4 loops=1)
+   Buffers: shared hit=43
+   ->  Sort  (cost=25.56..25.57 rows=1 width=866) (actual time=0.107..0.108 rows=4 loops=1)
+         Sort Key: l.rating DESC NULLS LAST, l.library_name
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=43
+         ->  GroupAggregate  (cost=25.34..25.55 rows=1 width=866) (actual time=0.081..0.085 rows=4 loops=1)
+               Group Key: l.library_id
+               Buffers: shared hit=37
+               ->  Sort  (cost=25.34..25.41 rows=26 width=1052) (actual time=0.074..0.075 rows=12 loops=1)
+                     Sort Key: l.library_id, f.facility_name
+                     Sort Method: quicksort  Memory: 26kB
+                     Buffers: shared hit=37
+                     ->  Nested Loop Left Join  (cost=4.51..24.73 rows=26 width=1052) (actual time=0.035..0.051 rows=12 loops=1)
+                           Buffers: shared hit=34
+                           ->  Index Scan using idx_libraries_city_area on libraries l  (cost=0.14..8.16 rows=1 width=834) (actual time=0.017..0.018 rows=4 loops=1)
+                                 Index Cond: ((city)::text = 'Sonipat'::text)
+                                 Buffers: shared hit=2
+                           ->  Nested Loop Left Join  (cost=4.37..16.48 rows=9 width=226) (actual time=0.006..0.008 rows=3 loops=4)
+                                 Buffers: shared hit=32
+                                 ->  Bitmap Heap Scan on library_facilities lf  (cost=4.22..14.76 rows=9 width=16) (actual time=0.003..0.003 rows=3 loops=4)
+                                       Recheck Cond: (library_id = l.library_id)
+                                       Heap Blocks: exact=4
+                                       Buffers: shared hit=8
+                                       ->  Bitmap Index Scan on library_facilities_pkey  (cost=0.00..4.22 rows=9 width=0) (actual time=0.001..0.001 rows=3 loops=4)
+                                             Index Cond: (library_id = l.library_id)
+                                             Buffers: shared hit=4
+                                 ->  Index Scan using facilities_pkey on facilities f  (cost=0.15..0.19 rows=1 width=226) (actual time=0.001..0.001 rows=1 loops=12)
+                                       Index Cond: (facility_id = lf.facility_id)
+                                       Buffers: shared hit=24
+ Planning:
+   Buffers: shared hit=201
+ Planning Time: 0.865 ms
+ Execution Time: 0.170 ms
+(34 rows)
+
+=== Run 2 ===
+                                                                             QUERY PLAN                                                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=25.56..25.57 rows=1 width=866) (actual time=0.237..0.241 rows=4 loops=1)
+   Buffers: shared hit=43
+   ->  Sort  (cost=25.56..25.57 rows=1 width=866) (actual time=0.236..0.238 rows=4 loops=1)
+         Sort Key: l.rating DESC NULLS LAST, l.library_name
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=43
+         ->  GroupAggregate  (cost=25.34..25.55 rows=1 width=866) (actual time=0.175..0.185 rows=4 loops=1)
+               Group Key: l.library_id
+               Buffers: shared hit=37
+               ->  Sort  (cost=25.34..25.41 rows=26 width=1052) (actual time=0.157..0.160 rows=12 loops=1)
+                     Sort Key: l.library_id, f.facility_name
+                     Sort Method: quicksort  Memory: 26kB
+                     Buffers: shared hit=37
+                     ->  Nested Loop Left Join  (cost=4.51..24.73 rows=26 width=1052) (actual time=0.060..0.104 rows=12 loops=1)
+                           Buffers: shared hit=34
+                           ->  Index Scan using idx_libraries_city_area on libraries l  (cost=0.14..8.16 rows=1 width=834) (actual time=0.026..0.028 rows=4 loops=1)
+                                 Index Cond: ((city)::text = 'Sonipat'::text)
+                                 Buffers: shared hit=2
+                           ->  Nested Loop Left Join  (cost=4.37..16.48 rows=9 width=226) (actual time=0.013..0.017 rows=3 loops=4)
+                                 Buffers: shared hit=32
+                                 ->  Bitmap Heap Scan on library_facilities lf  (cost=4.22..14.76 rows=9 width=16) (actual time=0.005..0.006 rows=3 loops=4)
+                                       Recheck Cond: (library_id = l.library_id)
+                                       Heap Blocks: exact=4
+                                       Buffers: shared hit=8
+                                       ->  Bitmap Index Scan on library_facilities_pkey  (cost=0.00..4.22 rows=9 width=0) (actual time=0.002..0.002 rows=3 loops=4)
+                                             Index Cond: (library_id = l.library_id)
+                                             Buffers: shared hit=4
+                                 ->  Index Scan using facilities_pkey on facilities f  (cost=0.15..0.19 rows=1 width=226) (actual time=0.002..0.002 rows=1 loops=12)
+                                       Index Cond: (facility_id = lf.facility_id)
+                                       Buffers: shared hit=24
+ Planning:
+   Buffers: shared hit=201
+ Planning Time: 1.790 ms
+ Execution Time: 0.373 ms
+(34 rows)
+
+=== Run 3 ===
+                                                                             QUERY PLAN                                                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=25.56..25.57 rows=1 width=866) (actual time=0.180..0.183 rows=4 loops=1)
+   Buffers: shared hit=43
+   ->  Sort  (cost=25.56..25.57 rows=1 width=866) (actual time=0.179..0.181 rows=4 loops=1)
+         Sort Key: l.rating DESC NULLS LAST, l.library_name
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=43
+         ->  GroupAggregate  (cost=25.34..25.55 rows=1 width=866) (actual time=0.135..0.142 rows=4 loops=1)
+               Group Key: l.library_id
+               Buffers: shared hit=37
+               ->  Sort  (cost=25.34..25.41 rows=26 width=1052) (actual time=0.121..0.123 rows=12 loops=1)
+                     Sort Key: l.library_id, f.facility_name
+                     Sort Method: quicksort  Memory: 26kB
+                     Buffers: shared hit=37
+                     ->  Nested Loop Left Join  (cost=4.51..24.73 rows=26 width=1052) (actual time=0.046..0.081 rows=12 loops=1)
+                           Buffers: shared hit=34
+                           ->  Index Scan using idx_libraries_city_area on libraries l  (cost=0.14..8.16 rows=1 width=834) (actual time=0.021..0.022 rows=4 loops=1)
+                                 Index Cond: ((city)::text = 'Sonipat'::text)
+                                 Buffers: shared hit=2
+                           ->  Nested Loop Left Join  (cost=4.37..16.48 rows=9 width=226) (actual time=0.010..0.013 rows=3 loops=4)
+                                 Buffers: shared hit=32
+                                 ->  Bitmap Heap Scan on library_facilities lf  (cost=4.22..14.76 rows=9 width=16) (actual time=0.004..0.004 rows=3 loops=4)
+                                       Recheck Cond: (library_id = l.library_id)
+                                       Heap Blocks: exact=4
+                                       Buffers: shared hit=8
+                                       ->  Bitmap Index Scan on library_facilities_pkey  (cost=0.00..4.22 rows=9 width=0) (actual time=0.002..0.002 rows=3 loops=4)
+                                             Index Cond: (library_id = l.library_id)
+                                             Buffers: shared hit=4
+                                 ->  Index Scan using facilities_pkey on facilities f  (cost=0.15..0.19 rows=1 width=226) (actual time=0.001..0.001 rows=1 loops=12)
+                                       Index Cond: (facility_id = lf.facility_id)
+                                       Buffers: shared hit=24
+ Planning:
+   Buffers: shared hit=201
+ Planning Time: 1.308 ms
+ Execution Time: 0.290 ms
+(34 rows)
+

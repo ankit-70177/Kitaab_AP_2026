@@ -1,0 +1,51 @@
+=== Run 1 ===
+                                                               QUERY PLAN                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=11.23..11.24 rows=1 width=834) (actual time=0.029..0.029 rows=1 loops=1)
+   Sort Key: monthly_price, library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=7
+   ->  Seq Scan on libraries  (cost=0.00..11.22 rows=1 width=834) (actual time=0.009..0.013 rows=1 loops=1)
+         Filter: (((city)::text ~~* 'Sonipat'::text) AND ((area)::text ~~* '%Model Town%'::text) AND (monthly_price <= '1000'::numeric))
+         Rows Removed by Filter: 5
+         Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=130
+ Planning Time: 0.970 ms
+ Execution Time: 0.044 ms
+(12 rows)
+
+=== Run 2 ===
+                                                               QUERY PLAN                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=11.23..11.24 rows=1 width=834) (actual time=0.068..0.069 rows=1 loops=1)
+   Sort Key: monthly_price, library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=7
+   ->  Seq Scan on libraries  (cost=0.00..11.22 rows=1 width=834) (actual time=0.022..0.030 rows=1 loops=1)
+         Filter: (((city)::text ~~* 'Sonipat'::text) AND ((area)::text ~~* '%Model Town%'::text) AND (monthly_price <= '1000'::numeric))
+         Rows Removed by Filter: 5
+         Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=130
+ Planning Time: 0.445 ms
+ Execution Time: 0.099 ms
+(12 rows)
+
+=== Run 3 ===
+                                                               QUERY PLAN                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=11.23..11.24 rows=1 width=834) (actual time=0.057..0.057 rows=1 loops=1)
+   Sort Key: monthly_price, library_name
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=7
+   ->  Seq Scan on libraries  (cost=0.00..11.22 rows=1 width=834) (actual time=0.018..0.025 rows=1 loops=1)
+         Filter: (((city)::text ~~* 'Sonipat'::text) AND ((area)::text ~~* '%Model Town%'::text) AND (monthly_price <= '1000'::numeric))
+         Rows Removed by Filter: 5
+         Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=130
+ Planning Time: 0.917 ms
+ Execution Time: 0.084 ms
+(12 rows)
+

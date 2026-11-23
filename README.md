@@ -17,6 +17,8 @@ This model does not yet include owner application review, membership plans or pa
 | dbms/diagrams/er_diagram.mmd | Editable Mermaid source for the diagram |
 | dbms/03_schema.sql | PostgreSQL tables, keys, checks, and indexes |
 | dbms/04_queries.sql | 12 READ and 8 WRITE examples based on the schema |
+| dbms/05_query_timings.md | Query timings table: 3 runs per query, average, and top plan node |
+| dbms/plans/ | EXPLAIN (ANALYZE, BUFFERS) output for every query (one file per query) |
 
 The query file labels every query and explains its purpose. Its sample values are for coursework demonstration; replace them with safely bound parameters in application code. Queries concerning entities absent from 03_schema.sql are not included.
 
@@ -24,7 +26,7 @@ The query file labels every query and explains its purpose. Its sample values ar
 
 Use PostgreSQL. Create a clean database, apply the schema, and load representative sample rows that satisfy its foreign keys and constraints. Run the READ examples and execute the WRITE examples inside a transaction that you roll back so the sample data remains unchanged.
 
-The schema and query set were executed against PostgreSQL 18.6 with sample users, libraries, facilities, and selections. All 20 queries completed; the test WRITE statements were rolled back.
+The schema and query set were executed against PostgreSQL 16.16 with sample users, libraries, facilities, and selections. All 20 queries completed; the test WRITE statements were rolled back. Execution plans and timings are recorded in dbms/05_query_timings.md and dbms/plans/.
 
 ## Repository layout
 
@@ -37,6 +39,10 @@ Kitaab_AP_2026/
     ├── 02_er_diagram.png
     ├── 03_schema.sql
     ├── 04_queries.sql
+    ├── 05_query_timings.md
+    ├── plans/
+    │   ├── R1.txt … R12.txt
+    │   └── W1.txt … W8.txt
     └── diagrams/
         └── er_diagram.mmd
 ~~~

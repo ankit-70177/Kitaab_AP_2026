@@ -1,0 +1,84 @@
+=== Run 1 ===
+                                                                      QUERY PLAN                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=22.32..22.32 rows=3 width=900) (actual time=0.116..0.118 rows=2 loops=1)
+   Sort Key: s.selected_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=9
+   ->  Hash Join  (cost=11.32..22.29 rows=3 width=900) (actual time=0.074..0.079 rows=2 loops=1)
+         Hash Cond: (l.library_id = s.library_id)
+         Buffers: shared hit=6
+         ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=818) (actual time=0.009..0.011 rows=6 loops=1)
+               Buffers: shared hit=1
+         ->  Hash  (cost=11.28..11.28 rows=3 width=90) (actual time=0.046..0.047 rows=2 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=5
+               ->  Bitmap Heap Scan on library_selections s  (cost=4.17..11.28 rows=3 width=90) (actual time=0.033..0.034 rows=2 loops=1)
+                     Recheck Cond: (user_id = 2)
+                     Heap Blocks: exact=1
+                     Buffers: shared hit=5
+                     ->  Bitmap Index Scan on idx_library_selections_user  (cost=0.00..4.17 rows=3 width=0) (actual time=0.016..0.016 rows=2 loops=1)
+                           Index Cond: (user_id = 2)
+                           Buffers: shared hit=4
+ Planning:
+   Buffers: shared hit=268
+ Planning Time: 1.639 ms
+ Execution Time: 0.243 ms
+(23 rows)
+
+=== Run 2 ===
+                                                                      QUERY PLAN                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=22.32..22.32 rows=3 width=900) (actual time=0.115..0.117 rows=2 loops=1)
+   Sort Key: s.selected_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=9
+   ->  Hash Join  (cost=11.32..22.29 rows=3 width=900) (actual time=0.066..0.071 rows=2 loops=1)
+         Hash Cond: (l.library_id = s.library_id)
+         Buffers: shared hit=6
+         ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=818) (actual time=0.010..0.011 rows=6 loops=1)
+               Buffers: shared hit=1
+         ->  Hash  (cost=11.28..11.28 rows=3 width=90) (actual time=0.036..0.037 rows=2 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=5
+               ->  Bitmap Heap Scan on library_selections s  (cost=4.17..11.28 rows=3 width=90) (actual time=0.023..0.024 rows=2 loops=1)
+                     Recheck Cond: (user_id = 2)
+                     Heap Blocks: exact=1
+                     Buffers: shared hit=5
+                     ->  Bitmap Index Scan on idx_library_selections_user  (cost=0.00..4.17 rows=3 width=0) (actual time=0.016..0.016 rows=2 loops=1)
+                           Index Cond: (user_id = 2)
+                           Buffers: shared hit=4
+ Planning:
+   Buffers: shared hit=268
+ Planning Time: 1.624 ms
+ Execution Time: 0.274 ms
+(23 rows)
+
+=== Run 3 ===
+                                                                      QUERY PLAN                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=22.32..22.32 rows=3 width=900) (actual time=0.090..0.091 rows=2 loops=1)
+   Sort Key: s.selected_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=9
+   ->  Hash Join  (cost=11.32..22.29 rows=3 width=900) (actual time=0.052..0.056 rows=2 loops=1)
+         Hash Cond: (l.library_id = s.library_id)
+         Buffers: shared hit=6
+         ->  Seq Scan on libraries l  (cost=0.00..10.70 rows=70 width=818) (actual time=0.007..0.009 rows=6 loops=1)
+               Buffers: shared hit=1
+         ->  Hash  (cost=11.28..11.28 rows=3 width=90) (actual time=0.029..0.029 rows=2 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=5
+               ->  Bitmap Heap Scan on library_selections s  (cost=4.17..11.28 rows=3 width=90) (actual time=0.018..0.020 rows=2 loops=1)
+                     Recheck Cond: (user_id = 2)
+                     Heap Blocks: exact=1
+                     Buffers: shared hit=5
+                     ->  Bitmap Index Scan on idx_library_selections_user  (cost=0.00..4.17 rows=3 width=0) (actual time=0.014..0.014 rows=2 loops=1)
+                           Index Cond: (user_id = 2)
+                           Buffers: shared hit=4
+ Planning:
+   Buffers: shared hit=268
+ Planning Time: 0.790 ms
+ Execution Time: 0.197 ms
+(23 rows)
+

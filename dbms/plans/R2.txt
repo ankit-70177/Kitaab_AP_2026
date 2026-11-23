@@ -1,0 +1,36 @@
+=== Run 1 ===
+                                                     QUERY PLAN                                                     
+--------------------------------------------------------------------------------------------------------------------
+ Index Scan using users_pkey on users  (cost=0.14..8.16 rows=1 width=808) (actual time=0.015..0.015 rows=1 loops=1)
+   Index Cond: (user_id = 2)
+   Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=93
+ Planning Time: 0.276 ms
+ Execution Time: 0.035 ms
+(7 rows)
+
+=== Run 2 ===
+                                                     QUERY PLAN                                                     
+--------------------------------------------------------------------------------------------------------------------
+ Index Scan using users_pkey on users  (cost=0.14..8.16 rows=1 width=808) (actual time=0.031..0.032 rows=1 loops=1)
+   Index Cond: (user_id = 2)
+   Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=93
+ Planning Time: 0.601 ms
+ Execution Time: 0.074 ms
+(7 rows)
+
+=== Run 3 ===
+                                                     QUERY PLAN                                                     
+--------------------------------------------------------------------------------------------------------------------
+ Index Scan using users_pkey on users  (cost=0.14..8.16 rows=1 width=808) (actual time=0.015..0.015 rows=1 loops=1)
+   Index Cond: (user_id = 2)
+   Buffers: shared hit=5
+ Planning:
+   Buffers: shared hit=93
+ Planning Time: 0.290 ms
+ Execution Time: 0.035 ms
+(7 rows)
+
