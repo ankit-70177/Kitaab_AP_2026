@@ -65,3 +65,4 @@ CREATE INDEX idx_library_selections_library
 -- This schema does not implement payments, paid subscriptions,
 -- individual seat reservations, or individual customer reviews.
 -- Those require additional requirements and tables.
+-- individual seat reservations, or individual customer reviews.
